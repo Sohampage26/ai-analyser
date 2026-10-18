@@ -1,0 +1,16 @@
+# systemd unit for running without Docker.
+# Install: python3.12 -m venv /opt/jaa/venv && /opt/jaa/venv/bin/pip install /opt/jaa/src-checkout
+#          cp .env /opt/jaa/.env && cp this file /etc/systemd/system/ && systemctl enable --now jenkins-ai-analyser
+[Unit]
+Description=Jenkins AI Analyser (webhook + reports API)
+After=network-online.target
+
+[Service]
+User=jaa
+WorkingDirectory=/opt/jaa
+EnvironmentFile=/opt/jaa/.env
+ExecStart=/opt/jaa/venv/bin/uvicorn analyser.api:app --host 0.0.0.0 --port 8000
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

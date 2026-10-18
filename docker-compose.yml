@@ -1,0 +1,26 @@
+services:
+  api:
+    build: .
+    env_file: .env
+    environment:
+      JAA_DB_PATH: /data/analyser.db
+    ports:
+      - "8000:8000"
+    volumes:
+      - jaa-data:/data
+    restart: unless-stopped
+
+  mcp:
+    build: .
+    command: ["python", "-m", "analyser.mcp_server", "--http"]
+    env_file: .env
+    environment:
+      JAA_DB_PATH: /data/analyser.db
+    ports:
+      - "8001:8001"
+    volumes:
+      - jaa-data:/data
+    restart: unless-stopped
+
+volumes:
+  jaa-data:

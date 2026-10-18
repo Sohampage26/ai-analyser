@@ -1,0 +1,32 @@
+[project]
+name = "jenkins-ai-analyser"
+version = "0.1.0"
+description = "AI agent that triages failed Jenkins builds, files Jira issues and comments on Gerrit changes"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=0.70",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "requests>=2.32",
+    "pydantic>=2.8",
+    "pydantic-settings>=2.4",
+    "mcp>=1.2,<2",  # 2.x renamed FastMCP -> MCPServer
+    "typer>=0.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+jaa = "analyser.cli:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
