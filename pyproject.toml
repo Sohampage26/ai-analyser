@@ -10,7 +10,7 @@ dependencies = [
     "requests>=2.32",
     "pydantic>=2.8",
     "pydantic-settings>=2.4",
-    "mcp>=1.2,<2",  # 2.x renamed FastMCP -> MCPServer
+    "mcp>=1.2,<3",  # 2.x renamed FastMCP -> MCPServer
     "typer>=0.12",
 ]
 
